@@ -1,0 +1,15 @@
+윤년 평년 계산하는 다트 코드
+
+import 'dart:io';
+
+void main()
+{
+
+  print("연도를 입력하세요:");
+
+  int? n = int.parse(stdin.readLineSync()!);
+ if(n % 4 == 0 && n % 100 == 0 && n % 400 != 0) {
+   print("$n년은 윤년입니다.");
+ }
+ else print("$n년은 평년입니다.");
+}
