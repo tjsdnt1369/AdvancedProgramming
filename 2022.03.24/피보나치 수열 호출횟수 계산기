@@ -1,0 +1,15 @@
+int n=0;
+
+void main() {
+  print(fib(5));
+  print("호출횟수 $n");
+}
+fib(number) {
+  if (number == 1 || number == 2) {
+    n=n+1;
+    return 1;
+  } else {
+    n=n+1;
+    return (fib(number-1) + fib(number - 2));
+  }
+}
