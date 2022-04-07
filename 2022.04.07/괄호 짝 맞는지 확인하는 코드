@@ -1,0 +1,126 @@
+class StackNode{
+  late String data ='';
+  late StackNode link =StackNode();
+}
+
+class LinkedStack {
+  StackNode top =StackNode();
+
+  LinkedStack(){
+    top.data='';
+  }
+
+  isEmpty() {
+    return (top.data == "");
+  }
+
+  push(item) {
+    StackNode newNode = StackNode();
+    newNode.data = item;
+    newNode.link = top;
+    top = newNode;
+  }
+
+  pop() {
+    if (isEmpty()) {
+      print("Deleting fail! Linked Stack is empty!!");
+      return 0;
+    } else {
+      var item = top.data;
+      top = top.link;
+      return item;
+    }
+  }
+
+  delete() {
+    if (isEmpty()) {
+      print("Deleting fail! Linked Stack is empty!!");
+
+    } else {
+      top = top.link;
+    }
+  }
+
+  peek() {
+    if (isEmpty()) {
+      print("Peeking fail! Linked Stack is empty!!");
+      return 0;
+    } else {
+      return top.data;
+    }
+  }
+
+  printStack() {
+    if (isEmpty()) {
+      print("Linked Stack is empty!! %n %n");
+    } else {
+      StackNode temp = top;
+      print("Linked Stack>> ");
+      while (temp != "") {
+        print("\t $temp.data \n", );
+        temp = temp.link;
+      }
+      print("");
+    }
+  }
+}
+
+class OptExp {
+  var exp;
+  var expSize;
+  var testCh;
+  var openPair;
+
+  testPair(exp) {
+    this.exp = exp;
+    LinkedStack S = LinkedStack();
+    expSize = this.exp.length;
+    for (int i = 0; i < expSize; i++) {
+      testCh = this.exp[i];
+      switch (testCh) {
+        case '(':
+        case '{':
+        case '[':
+          S.push(testCh);
+          break;
+        case ')':
+        case '}':
+        case ']':
+          if (S.isEmpty()){
+            return false;
+          }
+          else {
+            openPair = S.pop();
+            if ((openPair == '(' && testCh != ')') || (openPair == '{' && testCh != '}')
+                || (openPair == '[' && testCh != ']'))
+            {
+              return false;
+            }
+            else {
+              break;
+            }
+          }
+      }
+    }
+    if (S.isEmpty()){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+}
+
+
+void main() {
+  OptExp opt = OptExp();
+  String exp = "(3*5)-6/2)";
+
+  print(exp);
+
+  if (opt.testPair(exp)) {
+    print("괄호 맞음!!");
+  } else {
+    print("괄호 틀림!!");
+  }
+}
